@@ -6,13 +6,14 @@
     let socket = null;
 
     onMounted(()=> {
-        //console.log("mounted");
+        console.log("mounted");
         //connect to web sockets server
         socket = new WebSocket("ws://localhost:3000/primus"); //dit is de localhost waarop je backend draait
         //listen to messages from web socket server
         socket.onmessage = (event) => {
-            //console.log(event.data);
+            console.log(event.data);
             let newMessage = JSON.parse(event.data);
+            console.log("Received message:", newMessage);
             if(newMessage.action === "newMessage"){
                 messages.value.push(newMessage.message);
             }
@@ -32,7 +33,6 @@
         message.value = "";
     }
 </script>
-
 <template>
   <div>
     <ul>
